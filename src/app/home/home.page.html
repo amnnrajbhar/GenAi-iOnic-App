@@ -1,20 +1,139 @@
+
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Blank
+    <ion-title class="app-title">
+      GenAI
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div id="container" class="responsive-container">
+    <ion-card *ngIf="responseText" class="response-card">
+      <ion-card-content>
+        <pre class="response-text">{{ responseText }}</pre>
+      </ion-card-content>
+    </ion-card>
   </div>
 </ion-content>
+
+<ion-footer class="footer-container">
+  <div class="input-container">
+    <ion-item class="chat-input-container">
+      <ion-input [(ngModel)]="inputText" placeholder="Enter your message..." class="chat-input"></ion-input>
+      <ion-button fill="clear" (click)="generateText()" [disabled]="progress">
+        <ion-icon name="send"></ion-icon>
+      </ion-button>
+    </ion-item>
+    <p class="copyright">© 2025 <a href="https://amnnrajbhar.github.io/info/" target="_blank">Aman Rajbhar</a></p>
+  </div>
+</ion-footer>
+
+<style>
+  * {
+    box-sizing: border-box;
+  }
+
+  .app-title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
+    padding: 10px 0;
+  }
+
+  .responsive-container {
+    max-width: 95%;
+    margin: auto;
+    text-align: center;
+    padding: 10px;
+    padding-top: 90px;
+    padding-bottom: 120px;
+  }
+
+  .response-card {
+    width: 100%;
+    max-width: 600px;
+    margin: 10px auto;
+    border-radius: 15px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    background-color: #f9f9f9;
+    padding: 15px;
+    overflow-wrap: break-word;
+    margin-top: 20px;
+  }
+
+  .response-text {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-size: 18px;
+    color: #333;
+    text-align: left;
+    max-height: 50vh;
+    overflow-y: auto;
+  }
+
+  .footer-container {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: white;
+    padding: 10px 0;
+    box-shadow: 0px -2px 10px rgba(0, 0, 0, 0.2);
+  }
+
+  .input-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+  }
+
+  .chat-input-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 600px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    padding: 5px;
+    background: white;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .chat-input {
+    flex-grow: 1;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    outline: none;
+  }
+
+  ion-button[fill="clear"] {
+    min-width: auto;
+    padding: 0 10px;
+  }
+
+  .copyright {
+    font-size: 12px;
+    text-align: center;
+    margin-top: 10px;
+    color: #666;
+  }
+
+  .copyright a {
+    color: #007bff;
+    text-decoration: none;
+  }
+
+  @media screen and (max-width: 768px) {
+    .responsive-container {
+      padding-top: 110px;
+    }
+
+    .response-text {
+      font-size: 16px;
+      max-height: 45vh;
+    }
+  }
+</style>
